@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const { PORT } = require("./config/_env");
-
+const path = require("path");
 // Import routes
 const routes = require("./routes/index");
 // Setting
@@ -14,6 +14,9 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 server.use(cors());
 server.use(morgan("dev"));
+
+// Static files
+server.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 server.use("/", routes);

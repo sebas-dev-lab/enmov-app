@@ -1,4 +1,4 @@
-const { Schema, model } = require("mognoose");
+const { Schema, model } = require("mongoose");
 
 const imageSchema = new Schema(
   {
@@ -10,8 +10,22 @@ const imageSchema = new Schema(
       type: String,
       required: true,
     },
+    original_name: {
+      type: String,
+    },
+    title: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
+    posotion: {},
+    tag_id: {
+      type: String,
+    },
     user_id: {
       type: Schema.Types.ObjectId,
+      ref: "User",
     },
     type: {
       type: String,

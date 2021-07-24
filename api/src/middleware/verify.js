@@ -13,6 +13,7 @@ module.exports = {
           msj: "Have not got token",
         });
       }
+
       const decoded = jwt.verify(token, SECRET);
       req.userId = decoded.id;
       next();
@@ -32,12 +33,12 @@ module.exports = {
   },
 
   checkRole: async function (req, res, next) {
-    const { _id } = req.params;
+    const _id = req.userId;
     const user = await User.findOne({ _id: _id });
     if (!user) {
       return res.status(403).json({ msj: getStatusCodeMsj(403) });
     }
-    if (user.role !== "admin") {
+    if (user.role !== "admin" || user.role === "moderator") {
       return res.status(403).json({ msj: getStatusCodeMsj(403) });
     }
     next();

@@ -26,6 +26,7 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
+      select: false,
     },
     role: {
       type: String,
@@ -88,6 +89,7 @@ const userSchema = new Schema(
   { timestamp: true }
 );
 
+userSchema.plugin(require("mongoose-autopopulate"));
 const User = model("User", userSchema);
 
 module.exports = User;
