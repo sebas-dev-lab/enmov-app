@@ -31,6 +31,10 @@ const postSchema = new Schema({
     ref: "Style",
     autopopulate: true,
   },
+  reviews: {
+    type: [Schema.Types.ObjectId],
+    ref: "Review",
+  },
 });
 
 postSchema.plugin(require("mongoose-autopopulate"));

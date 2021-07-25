@@ -9,10 +9,7 @@ const reviewSchema = new Schema({
     type: String,
     required: true,
   },
-  title: {
-    type: Schema.Types.ObjectId,
-  },
-  image: {
+  post: {
     type: Schema.Types.ObjectId,
   },
   score: {

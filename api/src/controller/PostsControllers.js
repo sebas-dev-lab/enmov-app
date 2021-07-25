@@ -1,9 +1,13 @@
 const Image = require("../models/Images");
 const Post = require("../models/Post");
 const Style = require("../models/Style");
+const Review = require("../models/Review");
+
 const fs = require("fs");
 const { getStatusCodeMsj } = require("../utils/string");
 const { uploadToBucket, deleteFiles } = require("../helpers/s3");
+const { averageScore } = require("../helpers/statics");
+const { postConstantValues } = require("../utils/constantValues");
 
 const createPost = async (req, res) => {
   try {
@@ -74,9 +78,24 @@ const getOnePost = async (req, res) => {
       let image = await Image.findOne({ _id: post.image[i] });
       images.push(image);
     }
-    return res
-      .status(200)
-      .json({ msj: getStatusCodeMsj(200), get: true, post: post, images });
+
+    const reviews = [];
+    for (let i in post.reviews) {
+      let review = await Review.findOne({ _id: post.reviews[i] });
+      reviews.push(review);
+    }
+
+    const average = averageScore(reviews);
+
+    return res.status(200).json({
+      msj: getStatusCodeMsj(200),
+      get: true,
+      post: post,
+      images,
+      reviews,
+      average,
+      referValues: postConstantValues,
+    });
   } catch (e) {
     console.error(e);
     return res.status(500).json({ msj: getStatusCodeMsj(500), get: false });

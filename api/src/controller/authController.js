@@ -34,7 +34,9 @@ const login = async (req, res) => {
       return res.status(400).json({ msj: getStatusCode(400), login: false });
     }
     let find = email ? email : username;
-    const user = await User.findOne({ [email ? "email" : "username"]: find });
+    const user = await User.findOne({
+      [email ? "email" : "username"]: find,
+    }).select("+password");
     console.log(user);
     if (!user) {
       return res.status(404).json({ msj: getStatusCodeMsj(404), login: false });
