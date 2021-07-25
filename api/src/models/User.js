@@ -63,6 +63,10 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Image",
     },
+    cover_page: {
+      type: Schema.Types.ObjectId,
+      ref: "Image",
+    },
     social_data: {
       facebook: {
         verify: {

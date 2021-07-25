@@ -36,14 +36,16 @@ const createReview = async (req, res) => {
 
 const updateReview = async (req, res) => {
   try {
-    const { author, review, score } = req.body;
+    const { review, score } = req.body;
     const { post_id, review_id } = req.params;
-    if (!author || !review) {
-      return res.status(400).json({ msj: getStatusCode(400), updated: false });
+    if (!review) {
+      return res
+        .status(400)
+        .json({ msj: getStatusCodeMsj(400), updated: false });
     }
     await Review.findOneAndUpdate(
       { _id: review_id },
-      { author, review, score, date: Date.now() }
+      { author: req.userId, review, score, date: Date.now() }
     );
     return res.status(200).json({ msj: getStatusCodeMsj(200), updated: true });
   } catch (e) {
@@ -55,13 +57,23 @@ const updateReview = async (req, res) => {
 const deleteReview = async (req, res) => {
   try {
     const { post_id, review_id } = req.params;
+    console.log(typeof review_id === "string");
     const post = await Post.findOne({ _id: post_id });
     if (!post) {
       return res.status(404).json({ msj: getStatusCodeMsj(404), get: false });
     }
-    post.reviews = post.reviews.filter((rev) => rev._id !== review_id);
+    let newRev = [];
+    post.reviews.forEach((item, i) => {
+      if (item.toString() !== review_id.toString()) {
+        console.log("entro");
+        newRev.push(item);
+      }
+    });
+
+    post.reviews = newRev;
+
     await post.save();
-    await Review.delete({ _id: review_id });
+    await Review.deleteOne({ _id: review_id });
     const control = await Review.findOne({ _id: review_id });
     if (control) {
       return res

@@ -7,7 +7,10 @@ const fs = require("fs");
 const { getStatusCodeMsj } = require("../utils/string");
 const { uploadToBucket, deleteFiles } = require("../helpers/s3");
 const { averageScore } = require("../helpers/statics");
-const { postConstantValues } = require("../utils/constantValues");
+const {
+  postConstantValues,
+  setValueScore,
+} = require("../utils/constantValues");
 
 const createPost = async (req, res) => {
   try {
@@ -86,6 +89,7 @@ const getOnePost = async (req, res) => {
     }
 
     const average = averageScore(reviews);
+    const status = setValueScore(average);
 
     return res.status(200).json({
       msj: getStatusCodeMsj(200),
@@ -94,6 +98,7 @@ const getOnePost = async (req, res) => {
       images,
       reviews,
       average,
+      scoreTypes: status,
       referValues: postConstantValues,
     });
   } catch (e) {
