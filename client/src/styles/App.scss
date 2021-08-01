@@ -1,0 +1,35 @@
+/* VARIABLES */
+@import "./variables.scss";
+
+/* GENERAL */
+@import "./general.scss";
+
+/* APP */ /* HOME */
+@import "./Home/index.scss";
+
+/* NAVBAR */
+@import "./NavBar/index.scss";
+
+/* HEADER */
+@import "./Header/index.scss";
+
+/* SIDEBAR */
+@import "./SideBar/index.scss";
+
+/* POSTS */
+@import "./Posts/index.scss";
+
+/* SINGLE POSTS */
+@import "./SinglePost/index.scss";
+
+/* WRITE */
+@import "./Write/index.scss";
+
+/* SETTINGS */
+@import "./Settings/settings.scss";
+
+/* LOGIN */
+@import "./Login/index.scss";
+
+/* LOGIN */
+@import "./Register/index.scss";

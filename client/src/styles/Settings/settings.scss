@@ -1,0 +1,76 @@
+.settings {
+    display: flex;
+    &--wrapper {
+        flex: 9;
+        padding: 20px;
+        &--title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            &--update {
+                font-size: 30px;
+                margin-bottom: 20px;
+                color: lightcoral;
+            }
+            &--delete {
+                color: red;
+                font-size: 12px;
+                cursor: pointer;
+            }
+        }
+    }
+    &--form {
+        display: flex;
+        flex-direction: column;
+        &--pp {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            img {
+                width: 70px;
+                height: 70px;
+                border-radius: 20px;
+                object-fit: cover;
+            }
+        }
+        &--file--input {
+            &--icon {
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                background-color: lightcoral;
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+        }
+        #settings--form--file--input {
+            display: none;
+        }
+        &--submit {
+            width: 150px;
+            align-self: center;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            background-color: teal;
+            padding: 10px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        label {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        input {
+            color: gray;
+            margin: 10px 0;
+            height: 30px;
+            border: none;
+            border-bottom: 1px solid lightgray;
+        }
+    }
+}

@@ -1,0 +1,28 @@
+@mixin headerTitles($pos, $top, $fz) {
+    position: $pos;
+    top: $top;
+    font-size: $fz;
+}
+
+.header {
+    margin-top: 60px;
+    &--titles {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: "Lora", serif;
+        color: #444;
+        .t1 {
+            @include headerTitles(absolute, 18%, 20px);
+        }
+        .t2 {
+            @include headerTitles(absolute, 20%, 100px);
+        }
+    }
+    &--img {
+        width: 100%;
+        height: 450px;
+        margin-top: 80px;
+        object-fit: cover;
+    }
+}
