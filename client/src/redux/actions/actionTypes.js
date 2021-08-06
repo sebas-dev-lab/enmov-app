@@ -1,0 +1,3 @@
+/* BASIC AUTH */
+export const BASIC_AUTH_SINGUP = "BASIC_AUTH_SINGUP";
+export const BASIC_AUTH_LOGIN = "BASIC_AUTH_LOGIN";

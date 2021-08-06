@@ -1,3 +1,4 @@
+import React from "react";
 import NavBar from "./components/NavBar/NavBar";
 import Write from "./components/Write/Write";
 import Home from "./pages/Home/Home";
@@ -5,8 +6,8 @@ import Login from "./pages/Login/Login";
 import SinglePost from "./pages/Post/SinglePost";
 import Register from "./pages/Register/Register";
 import Settings from "./pages/Settings/Settings";
-import "./styles/App.scss";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "./styles/App.scss";
 
 function App() {
   const user = false;
