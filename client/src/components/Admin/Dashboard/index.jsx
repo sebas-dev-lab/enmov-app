@@ -1,10 +1,12 @@
 import React from "react";
 import { Layout, Menu, Breadcrumb } from "antd";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {
   EditOutlined,
   DotChartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import CreatePost from "./Post/CreatePosts";
 
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -12,7 +14,7 @@ const { SubMenu } = Menu;
 const DashboardAdmin = () => {
   return (
     <Layout className="layout-adminDash">
-      <Layout>
+      <Router>
         <Layout>
           <Sider width={200} className="site-layout-background">
             <Menu
@@ -22,9 +24,12 @@ const DashboardAdmin = () => {
               style={{ height: "100%", borderRight: 0 }}
             >
               <SubMenu key="sub1" icon={<EditOutlined />} title="Post">
-                <Menu.Item key="1">Crear nuevo post</Menu.Item>
+                <Menu.Item key="1">
+                  <Link to={`/ad/${'123'}/write`}>Crear nuevo post</Link>
+                </Menu.Item>
                 <Menu.Item key="2">Mis Posts</Menu.Item>
                 <Menu.Item key="3">Comentrios</Menu.Item>
+                <Menu.Item key="4">Categorias</Menu.Item>
               </SubMenu>
               <SubMenu key="sub2" icon={<DotChartOutlined />} title="Usuarios">
                 <Menu.Item key="5">Usuarios</Menu.Item>
@@ -52,11 +57,11 @@ const DashboardAdmin = () => {
                 minHeight: 280,
               }}
             >
-              Content
+              <Route exact path="/ad/:id/write" component={CreatePost} />
             </Content>
           </Layout>
         </Layout>
-      </Layout>
+      </Router>
     </Layout>
   );
 };

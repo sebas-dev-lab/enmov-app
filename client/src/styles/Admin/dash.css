@@ -5,3 +5,23 @@
 .site-layout-background {
   min-height: 600px;
   background: #fff; }
+
+.create-post {
+  display: flex;
+  justify-content: space-between; }
+  .create-post .content-post {
+    flex: 9; }
+    .create-post .content-post .title-post {
+      text-align: center; }
+    .create-post .content-post .resume-section {
+      min-width: 800px;
+      max-width: 800px; }
+  .create-post .settings-post {
+    flex: 3;
+    min-height: 100%;
+    border-left: 1px solid rgba(151, 151, 151, 0.534); }
+    .create-post .settings-post .title-post-settings {
+      text-align: center; }
+    .create-post .settings-post .settings-comments {
+      font-size: small;
+      font-weight: bold; }

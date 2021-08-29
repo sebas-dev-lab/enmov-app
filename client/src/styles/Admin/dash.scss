@@ -7,3 +7,34 @@
   min-height: 600px;
   background: #fff;
 }
+
+.create-post {
+  display: flex;
+  justify-content: space-between;
+  .content-post {
+    flex: 9;
+    .title-post {
+      text-align: center;
+    }
+    .resume-section {
+      min-width: 800px;
+      max-width: 800px;
+    }
+    .post-section {
+    }
+  }
+  .settings-post {
+    flex: 3;
+    min-height: 100%;
+    border-left: 1px solid rgba(151, 151, 151, 0.534);
+    h2 {
+    }
+    .title-post-settings {
+      text-align: center;
+    }
+    .settings-comments {
+      font-size: small;
+      font-weight: bold;
+    }
+  }
+}
