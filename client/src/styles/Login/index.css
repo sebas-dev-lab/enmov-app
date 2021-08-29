@@ -9,6 +9,7 @@
   .login--title {
     font-size: 50px; }
   .login--form {
+    width: 400px;
     margin-top: 20px;
     display: flex;
     flex-direction: column; }
@@ -36,3 +37,10 @@
     padding: 10px;
     background-color: white;
     border: none; }
+
+.auth-msj {
+  align-items: center;
+  text-align: center; }
+  .auth-msj p {
+    color: red;
+    font-size: small; }

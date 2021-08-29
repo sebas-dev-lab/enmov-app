@@ -5,6 +5,7 @@ const { getStatusCodeMsj } = require("../utils/string");
 module.exports = {
   verifyFn: async (req, res, next) => {
     try {
+      console.log(req)
       const token = req.headers["fayser-auth"];
       console.log(token);
       if (!token) {

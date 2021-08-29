@@ -1,3 +1,4 @@
+@import '~antd/dist/antd.css';
 /* VARIABLES */
 @import "./variables.scss";
 
@@ -33,3 +34,8 @@
 
 /* LOGIN */
 @import "./Register/index.scss";
+
+/* ADMIN */
+@import "./Admin/index.scss";
+
+

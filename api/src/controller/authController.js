@@ -20,10 +20,10 @@ const singUp = async (req, res) => {
     });
     await newUser.save();
 
-    return res.status(201).json({ msj: getStatusCodeMsj(201), singup: true });
+    return res.status(201).json({ msj: getStatusCodeMsj(201), created: true });
   } catch (e) {
     console.error(e);
-    return res.status(500).json({ msj: getStatusCodeMsj(500), singup: false });
+    return res.status(500).json({ msj: getStatusCodeMsj(500), created: false });
   }
 };
 
@@ -31,7 +31,9 @@ const login = async (req, res) => {
   try {
     const { email, username, password } = req.body;
     if (!password) {
-      return res.status(400).json({ msj: getStatusCode(400), login: false });
+      return res
+        .status(400)
+        .json({ status: 400, msj: getStatusCodeMsj(400), login: false });
     }
     let find = email ? email : username;
     const user = await User.findOne({
@@ -39,21 +41,44 @@ const login = async (req, res) => {
     }).select("+password");
     console.log(user);
     if (!user) {
-      return res.status(404).json({ msj: getStatusCodeMsj(404), login: false });
+      return res
+        .status(404)
+        .json({ status: 404, msj: getStatusCodeMsj(404), login: false });
     }
     const decrypt = new Password();
     const decode = await decrypt.comparePassword(password, user.password);
     console.log(decode);
     if (!decode) {
-      return res.status(401).json({ msj: getStatusCodeMsj(401), login: false });
+      return res
+        .status(401)
+        .json({ status: 401, msj: getStatusCodeMsj(401), login: false });
     }
     const token = decrypt.createToken(user);
-    return res
-      .status(200)
-      .json({ msj: getStatusCodeMsj(200), login: true, token: token });
+    return res.status(200).json({
+      msj: getStatusCodeMsj(200),
+      login: true,
+      auth: {
+        login: true,
+        token: token,
+        name: user.name,
+        user_name: user.username,
+        user_id: user._id,
+      },
+    });
   } catch (e) {
     console.error(e);
-    return res.status(500).json({ msj: getStatusCodeMsj(500), singup: false });
+    return res
+      .status(500)
+      .json({ status: 500, msj: getStatusCodeMsj(500), login: false });
+  }
+};
+
+const logout = async (req, res) => {
+  try {
+    res.status(200).json({ msj: getStatusCodeMsj(200), logout: true });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({ msj: getStatusCodeMsj(500), logout: false });
   }
 };
 
@@ -80,4 +105,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { singUp, login, deleteUser };
+module.exports = { singUp, login, deleteUser, logout };

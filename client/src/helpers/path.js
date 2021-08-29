@@ -15,3 +15,11 @@ export const path = {
     img: "https://fy-bucket-photos.s3.amazonaws.com/ade4a69a-2c97-4427-bf57-b47fefd8c98f.png",
   },
 };
+
+export const routes = {
+  auth: {
+    signup: "/signup",
+    signin: "/signin",
+    admin: "/ad",
+  },
+};

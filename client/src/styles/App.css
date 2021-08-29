@@ -1,3 +1,4 @@
+@import url(~antd/dist/antd.css);
 /* VARIABLES */
 /* GENERAL */
 .link {
@@ -367,6 +368,7 @@
   .login--title {
     font-size: 50px; }
   .login--form {
+    width: 400px;
     margin-top: 20px;
     display: flex;
     flex-direction: column; }
@@ -394,6 +396,13 @@
     padding: 10px;
     background-color: white;
     border: none; }
+
+.auth-msj {
+  align-items: center;
+  text-align: center; }
+  .auth-msj p {
+    color: red;
+    font-size: small; }
 
 /* LOGIN */
 .register {
@@ -431,6 +440,26 @@
   .register label {
     margin: 10px 0; }
   .register input {
+    width: 400px;
     padding: 10px;
     background-color: white;
     border: none; }
+
+/* ADMIN */
+.layout-adminDash {
+  margin: 0rem 0rem;
+  min-height: 800px; }
+
+.site-layout-background {
+  min-height: 600px;
+  background: #fff; }
+
+.site-layout-content {
+  border: 1px solid rgba(153, 153, 153, 0.596);
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+  min-width: 500px;
+  background: #fff; }

@@ -1,0 +1,17 @@
+.layout-adminDash {
+  margin: 0rem 0rem;
+  min-height: 800px; }
+
+.site-layout-background {
+  min-height: 600px;
+  background: #fff; }
+
+.site-layout-content {
+  border: 1px solid rgba(153, 153, 153, 0.596);
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+  min-width: 500px;
+  background: #fff; }
