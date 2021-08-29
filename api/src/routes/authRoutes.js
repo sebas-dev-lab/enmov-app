@@ -14,6 +14,6 @@ const { checkDuplicateEmail, verifyFn } = require("../middleware/verify");
 router.post("/signup", checkDuplicateEmail, singUp);
 router.post("/signin", login);
 router.post("/logout", verifyFn, logout);
-router.delete("/:_id", verifyFn, deleteUser);
+router.delete("/delete/:_id", verifyFn, deleteUser);
 // Exports
 module.exports = router;
