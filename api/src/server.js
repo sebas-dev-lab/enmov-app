@@ -5,21 +5,33 @@ const { PORT } = require("./config/_env");
 const path = require("path");
 // Import routes
 const routes = require("./routes/index");
-// Setting
-const server = express();
-server.set("PORT", PORT || 4001);
+
+/*  Setting */
+
+// server-settings
+const app = express();
+app.set("PORT", PORT || 4001);
+
+// socket-settings
+const server = require("http").createServer(app);
+const io = require("socket.io")(server, { cors: { origin: "*" } });
 
 // Middlewares
-server.use(express.json());
-server.use(express.urlencoded({ extended: false }));
-server.use(cors());
-server.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
+app.use(morgan("dev"));
 
 // Static files
-server.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
-server.use("/", routes);
+app.use("/", routes);
 
+// Socket
+io.on("connection", (socket) => {
+    console.log("io connected", socket.id);
+  });
+  
 // Export
-module.exports = server;
+module.exports = { server, app, io };

@@ -1,3 +1,47 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box; }
+
+.write_post {
+  background-color: #ffffff; }
+  .write_post .container .ql-editor {
+    width: 8.5in;
+    min-height: 11in;
+    padding: 1in;
+    margin: 1rem;
+    box-shadow: 0 0 5px 0 black;
+    background-color: whi; }
+  .write_post .container .ql-container.ql-snow {
+    border: none;
+    display: flex;
+    justify-content: center; }
+  .write_post .container .ql-toolbar.ql-snow {
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #f3f3f3;
+    border: none;
+    box-shadow: 0 0 5px 0 black; }
+
+@page {
+  .write_post {
+    margin: 1in; } }
+  @media print {
+    .write_post {
+      background: none; }
+      .write_post .container .ql-editor {
+        width: 6.5in;
+        height: 9in;
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+        align-self: flex-start; }
+      .write_post .container .ql-toolbar.ql-snow {
+        display: none; } }
+
 .write {
   padding-top: 50px; }
   .write--img {

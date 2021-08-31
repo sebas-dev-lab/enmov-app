@@ -1,65 +1,114 @@
-@mixin file-input-text() {
-    font-size: 30px;
-    padding: 20px;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.write_post {
+  background-color: #ffffff;
+  .container .ql-editor {
+    width: 8.5in;
+    min-height: 11in;
+    padding: 1in;
+    margin: 1rem;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 5);
+    background-color: whi;
+  }
+  .container .ql-container.ql-snow {
     border: none;
-    width: 70vw;
+    display: flex;
+    justify-content: center;
+  }
+  .container .ql-toolbar.ql-snow {
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #f3f3f3;
+    border: none;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 5);
+  }
+  @page {
+    margin: 1in;
+  }
+  @media print {
+    background: none;
+    .container .ql-editor {
+      width: 6.5in;
+      height: 9in;
+      padding: 0;
+      margin: 0;
+      box-shadow: none;
+      align-self: flex-start;
+    }
+    .container .ql-toolbar.ql-snow  {
+      display: none;
+    }
+  }
+}
+
+@mixin file-input-text() {
+  font-size: 30px;
+  padding: 20px;
+  border: none;
+  width: 70vw;
 }
 
 .write {
-    padding-top: 50px;
-    &--img {
-        margin-left: 150px;
-        width: 70vw;
-        height: 250px;
-        border-radius: 10px;
-        object-fit: cover;
+  padding-top: 50px;
+  &--img {
+    margin-left: 150px;
+    width: 70vw;
+    height: 250px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  &--form {
+    position: relative;
+    &--group {
+      margin-left: 150px;
+      display: flex;
+      align-items: center;
     }
-    &--form {
-        position: relative;
-        &--group {
-            margin-left: 150px;
-            display: flex;
-            align-items: center;
-        }
-        &--submit {
-            position: absolute;
-            top: 20px;
-            right: 50px;
-            color: white;
-            background-color: teal;
-            padding: 10px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+    &--submit {
+      position: absolute;
+      top: 20px;
+      right: 50px;
+      color: white;
+      background-color: teal;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
     }
-    .file-input {
-        &--file {
-            @include file-input-text();
-            display: none;
-        }
-        &--text {
-            @include file-input-text();
-            &--textarea {
-                font-size: 20px;
-                height: 100vh;
-            }
-        }
-        &--text:focus {
-            outline: none;
-        }
-        &--icon {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            border: 1px solid;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: gray;
-            cursor: pointer;
-        }
+  }
+  .file-input {
+    &--file {
+      @include file-input-text();
+      display: none;
     }
+    &--text {
+      @include file-input-text();
+      &--textarea {
+        font-size: 20px;
+        height: 100vh;
+      }
+    }
+    &--text:focus {
+      outline: none;
+    }
+    &--icon {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 1px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: gray;
+      cursor: pointer;
+    }
+  }
 }

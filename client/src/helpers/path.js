@@ -22,4 +22,7 @@ export const routes = {
     signin: "/signin",
     admin: "/ad",
   },
+  post: {
+    write: "/write_post",
+  },
 };

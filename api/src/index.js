@@ -1,4 +1,4 @@
-const server = require("./server");
+const {server, app} = require("./server");
 const mongoose = require("./db");
 
 const db = mongoose.connection;
@@ -8,6 +8,7 @@ db.once("open", () => {
   console.log("DB is connected");
 });
 
-server.listen(server.get("PORT"), () => {
-  console.log(`Server on port ${server.get("PORT")}`);
+server.listen(app.get("PORT"), () => {
+  console.log(`Server on port ${app.get("PORT")}`);
 });
+

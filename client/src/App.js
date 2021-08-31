@@ -13,6 +13,7 @@ import Admin from "./pages/Admin";
 import LoginAdminPage from "./pages/Admin/Login";
 import { routes } from "./helpers/path";
 import NavBarAdmin from "./components/Admin/NavbarAdmin/Index";
+import WritePost from "./components/Admin/Dashboard/Post/CreatePosts/WritePost";
 
 function App() {
   let location = useLocation();
@@ -25,7 +26,14 @@ function App() {
 
   return (
     <Fragment>
-      {!path.includes(routes.auth.admin) ? <NavBar /> : <NavBarAdmin />}
+      {!path.includes(routes.auth.admin) &&
+      !path.includes(routes.post.write) ? (
+        <NavBar />
+      ) : !path.includes(routes.post.write) ? (
+        <NavBarAdmin />
+      ) : (
+        ""
+      )}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route
@@ -49,6 +57,7 @@ function App() {
           render={() => (ath ? <Settings /> : <Login />)}
         />
         <Route exact path="/post/:postid" component={SinglePost} />
+        <Route exact path="/write_post" component={WritePost} />
 
         <Route exact path="/ad/auth" component={LoginAdminPage} />
         <Route exact path="/ad/:id" component={Admin} />

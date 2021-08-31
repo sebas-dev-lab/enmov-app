@@ -18,7 +18,9 @@ const CreatePost = () => {
         </div>
         <div className="post-section">
           {/* Post full description images*/}
-          <Button type="primary">Cuerpo del post</Button>
+          <a target='_blank' href='/write_post'>
+          <Button type="primary">Escribir</Button>
+          </a>
         </div>
       </div>
       <div className="settings-post">
