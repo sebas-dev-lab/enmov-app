@@ -25,7 +25,7 @@ router.post("/img", verifyFn, checkRole, uploadImage, uploadImagePost);
 
 // Post
 router.post("/post", verifyFn, checkRole, createPost);
-router.put("/updatepost/:post_id", verifyFn, checkRole, updatePost);
+router.put("/post/update/:post_id", verifyFn, checkRole, updatePost);
 router.delete("/post/:post_id", verifyFn, checkRole, deletePost);
 router.get("/post", getAllPosts);
 router.get("/post/:post_id", getOnePost);

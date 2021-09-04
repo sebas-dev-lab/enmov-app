@@ -4,20 +4,19 @@ const postSchema = new Schema({
   author: {
     type: Schema.Types.ObjectId,
     ref: "User",
-    required: true,
-    autopopulate: true,
   },
   date: {
     type: Date,
     default: Date.now(),
   },
+  modify_date: {
+    type: Date,
+  },
   title: {
     type: String,
-    required: true,
   },
-  description: {
+  subtitle: {
     type: String,
-    required: true,
   },
   resume: {
     type: String,
@@ -26,14 +25,23 @@ const postSchema = new Schema({
     type: [Schema.Types.ObjectId],
     ref: "Image",
   },
-  style: {
-    type: Schema.Types.ObjectId,
-    ref: "Style",
-    autopopulate: true,
+  data: {
+    type: Object,
   },
   reviews: {
     type: [Schema.Types.ObjectId],
     ref: "Review",
+  },
+  settings: {
+    view_reviews: {
+      type: Boolean,
+    },
+    view_score: {
+      type: Boolean,
+    },
+    social: {
+      type: Boolean,
+    },
   },
 });
 

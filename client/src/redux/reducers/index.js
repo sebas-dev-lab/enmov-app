@@ -4,8 +4,12 @@ import { combineReducers } from "redux";
 import authReducers from "./auth/basicAuth";
 // User
 
+// Post
+import writePostReducers from "./post/write";
+
 const mainReducers = combineReducers({
   auth: authReducers,
+  post: writePostReducers,
 });
 
 export default mainReducers;

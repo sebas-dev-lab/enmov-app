@@ -3,16 +3,16 @@ import { Input, Form } from "antd";
 
 const { TextArea } = Input;
 
-const Resume = () => {
+const Resume = ({ content, setContent }) => {
   const onChange = (e) => {
-    console.log(e);
+    setContent({ ...content, [e.target.name]: e.target.value });
   };
   return (
     <Fragment>
       <Form
         name="basic"
         labelCol={{
-          span:3,
+          span: 3,
         }}
         wrapperCol={{
           span: 16,
@@ -23,21 +23,18 @@ const Resume = () => {
         // onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
       >
-        <Form.Item
-          name="title"
-          label="Titulo"
-          valuePropName="title"
-          required={true}
-        >
+        <Form.Item label="Titulo" valuePropName="title" required={true}>
           <Input
+            name="title"
             placeholder="Elige un titulo para tu post"
             allowClear
             onChange={onChange}
             bordered={false}
           />
         </Form.Item>
-        <Form.Item name="subtitle" label="Subtitulo" valuePropName="subtitle">
+        <Form.Item label="Subtitulo" valuePropName="subtitle">
           <Input
+            name="subtitle"
             placeholder="Puedes agregar un subtitulo"
             allowClear
             onChange={onChange}
@@ -45,13 +42,9 @@ const Resume = () => {
           />
         </Form.Item>
 
-        <Form.Item
-          name="resume"
-          label="Resumen"
-          valuePropName="resume"
-          required={true}
-        >
+        <Form.Item label="Resumen" valuePropName="resume" required={true}>
           <TextArea
+            name="resume"
             placeholder="Agrega un resumen a tu post. Atrae a tus lectores con un resumen deslumbrante"
             allowClear
             onChange={onChange}

@@ -57,7 +57,7 @@ function App() {
           render={() => (ath ? <Settings /> : <Login />)}
         />
         <Route exact path="/post/:postid" component={SinglePost} />
-        <Route exact path="/write_post" component={WritePost} />
+        <Route exact path="/write_post/:id" component={WritePost} />
 
         <Route exact path="/ad/auth" component={LoginAdminPage} />
         <Route exact path="/ad/:id" component={Admin} />
