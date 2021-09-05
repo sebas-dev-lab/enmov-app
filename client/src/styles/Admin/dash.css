@@ -1,6 +1,6 @@
 .layout-adminDash {
   margin: 0rem 0rem;
-  min-height: 800px; }
+  min-height: 100vh; }
 
 .site-layout-background {
   min-height: 600px;
@@ -17,9 +17,11 @@
     flex: 6; }
     .create-post .content-post .title-post {
       text-align: center; }
-    .create-post .content-post .resume-section {
-      min-width: 800px;
-      max-width: 800px; }
+    .create-post .content-post .post-section {
+      display: flex;
+      flex-direction: column; }
+      .create-post .content-post .post-section .ant-btn.ant-btn-primary {
+        width: 400px; }
   .create-post .settings-post {
     flex: 3;
     min-height: 100%;
@@ -29,3 +31,14 @@
     .create-post .settings-post .settings-comments {
       font-size: small;
       font-weight: bold; }
+    .create-post .settings-post .settings-checkbox {
+      display: flex;
+      flex-direction: column; }
+    .create-post .settings-post .settings-check {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0rem 2rem 0rem 2rem; }
+    .create-post .settings-post .ant-checkbox-group {
+      display: flex;
+      flex-direction: column; }

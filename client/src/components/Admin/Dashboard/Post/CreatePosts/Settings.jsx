@@ -2,7 +2,13 @@ import React, { Fragment } from "react";
 import { Checkbox, Divider } from "antd";
 const CheckboxGroup = Checkbox.Group;
 
-const plainOptions = ["Comentarios", "Score", "Redes sociales"];
+const plainOptions = [
+  "Comentarios",
+  "Score",
+  "Redes sociales",
+  "Marketings",
+  "Comentarios publicos",
+];
 const defaultCheckedList = ["Comentarios", "Score"];
 
 const Settings = () => {
@@ -23,22 +29,26 @@ const Settings = () => {
   };
 
   return (
-    <Fragment>
-      <p className='settings-comments'>Selecciona las secciones que desea mostrar</p>
-      <Checkbox
-        indeterminate={indeterminate}
-        onChange={onCheckAllChange}
-        checked={checkAll}
-      >
-        Seleccionar todos
-      </Checkbox>
-      <Divider />
-      <CheckboxGroup
-        options={plainOptions}
-        value={checkedList}
-        onChange={onChange}
-      />
-    </Fragment>
+    <div className="settings-checkbox">
+      <p className="settings-comments">
+        Secciones que desea mostrar en el post
+      </p>
+      <div className="settings-check">
+        <Checkbox
+          indeterminate={indeterminate}
+          onChange={onCheckAllChange}
+          checked={checkAll}
+        >
+          Seleccionar todos
+        </Checkbox>
+        <Divider />
+        <CheckboxGroup
+          options={plainOptions}
+          value={checkedList}
+          onChange={onChange}
+        />
+      </div>
+    </div>
   );
 };
 
