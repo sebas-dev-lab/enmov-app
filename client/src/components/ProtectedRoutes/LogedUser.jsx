@@ -1,10 +1,11 @@
 import React from "react";
 import {Route} from 'react-router-dom'
+import { getAuthCookieString } from "../../helpers/stringsManage";
 
-const UserDashBoardProtected = ({ component: Component, ...rest }) => {
+const UserProtected = ({ component: Component, ...rest }) => {
 
-    if (getCookie("token")) {
-      return (
+    if (getAuthCookieStringieString("token").token) {
+      return ( 
         <Route
           {...rest}
           render={(props) => {
@@ -17,4 +18,4 @@ const UserDashBoardProtected = ({ component: Component, ...rest }) => {
     }
   };
   
-  export default UserDashBoardProtected;
+  export default UserProtected;

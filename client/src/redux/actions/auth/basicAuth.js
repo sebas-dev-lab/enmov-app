@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as actionTypes from "../actionTypes";
 import { url } from "../../../config/_env";
-import { setMsjTypeCode } from "../../../helpers/statuString";
+import { getStatusCodeMsj, setMsjTypeCode } from "../../../helpers/statuString";
 import {
   deleteAuthCookieString,
   getAuthCookieString,
@@ -70,6 +70,7 @@ export const signin = (content) => async (dispatch) => {
         type: actionTypes.BASIC_AUTH_LOGIN,
         ath: signinData.data.auth,
         msj: setMsjTypeCode(signinData.data.status),
+        control:signinData.data.control
       });
       setAuthCookieStrings(signinData.data.auth);
       return true;
@@ -108,11 +109,39 @@ export const logout = () => async (dispatch) => {
         type: actionTypes.BASIC_AUTH_LOGOUT,
         msj: "ok",
       });
-      return true
+      return true;
     }
-    return false
+    return false;
   } catch (e) {
     console.log(e);
-    return false
+    return false;
+  }
+};
+
+export const authControl =  () => async(dispatch) => {
+  try {
+    let tk = getAuthCookieString("token").token;
+    if (tk) {
+      const { data } = await axios.get(`${URL}/logout`, {
+        headers: { "fayser-auth": tk },
+      });
+      if (data) {
+        dispatch({
+          type: actionTypes.BASIC_AUTH_CONTROL_SESSION,
+          auth: true,
+        });
+        setAuthCookieStrings(data.login);
+        return data.login;
+      }
+    } else {
+      dispatch({
+        type: actionTypes.BASIC_AUTH_CONTROL_SESSION,
+        auth: false,
+      });
+      return false;
+    }
+  } catch (e) {
+    console.log(e);
+    return false;
   }
 };

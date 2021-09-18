@@ -6,6 +6,7 @@ const {
   login,
   deleteUser,
   logout,
+  authControl,
 } = require("../controller/authController");
 
 // middleware
@@ -15,5 +16,8 @@ router.post("/signup", checkDuplicateEmail, singUp);
 router.post("/signin", login);
 router.post("/logout", verifyFn, logout);
 router.delete("/delete/:_id", verifyFn, deleteUser);
+
+// control
+router.get("/control", verifyFn, authControl);
 // Exports
 module.exports = router;

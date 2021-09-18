@@ -63,6 +63,7 @@ const login = async (req, res) => {
         name: user.name,
         user_name: user.username,
         user_id: user._id,
+        control:true
       },
     });
   } catch (e) {
@@ -105,4 +106,19 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { singUp, login, deleteUser, logout };
+// Auth control
+const authControl = async (req, res) => {
+  try {
+    if (req.userId) {
+      return res.status(200).json({ msj: getStatusCodeMsj(200), login: true });
+    }
+    return res.status(401).json({ msj: getStatusCodeMsj(401), login: false });
+  } catch (e) {
+    console.log(e);
+    return res
+      .status(e.response.status)
+      .json({ msj: getStatusCodeMsj(e.response.status) });
+  }
+};
+
+module.exports = { singUp, login, deleteUser, logout, authControl };

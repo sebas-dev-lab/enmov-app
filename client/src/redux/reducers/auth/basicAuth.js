@@ -3,6 +3,7 @@ import {
   BASIC_AUTH_LOGIN,
   BASIC_AUTH_LOGOUT,
   BASIC_AUTH_VERIFY_SESSION,
+  BASIC_AUTH_CONTROL_SESSION,
   BASIC_AUTH_SIGNUP_ERROR,
   BASIC_AUTH_LOGOUT_ERROR,
   BASIC_AUTH_LOGIN_ERROR,
@@ -11,8 +12,9 @@ import {
 
 const initialState = {
   ath: false,
+  control: false,
   msj: "",
-  signupMsj:''
+  signupMsj: "",
 };
 
 const authReducers = (state = initialState, action) => {
@@ -27,12 +29,18 @@ const authReducers = (state = initialState, action) => {
         ...state,
         ath: action.ath,
         msj: action.msj,
+        control:action.control
       };
     case BASIC_AUTH_LOGOUT:
       return {
         ...state,
         ath: false,
-        msj: '',
+        msj: "",
+      };
+    case BASIC_AUTH_CONTROL_SESSION:
+      return {
+        ...state,
+        control: action.auth,
       };
     case BASIC_AUTH_SIGNUP_ERROR:
       return {

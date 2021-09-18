@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { signinPromise } from "../../helpers/authHelpers";
 import { message } from "antd";
+import UserAuth from "../../components/UserAuth/Index";
+import LoginAdmin from "../../components/Admin/LoginAdmin";
+import { getCookie } from "../../helpers/cookieFunctions";
 
-const Login = () => {
+const Login = ({ authType }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const { ath, msj } = useSelector((store) => store.auth);
   const [data, setData] = useState({
     email: "",
@@ -17,7 +21,31 @@ const Login = () => {
     e.preventDefault();
     setData({ ...data, [e.target.name]: e.target.value });
   };
-  
+
+  const signinFetch = (info, redirPath) => {
+    signinPromise(dispatch, info).then((res) => {
+      if (pathname === "/signin") {
+        if (res) {
+          openMessage().then((res) => {
+            history.push(redirPath);
+          });
+        } else {
+          warning();
+        }
+      } else {
+        if (res) {
+          if (getCookie("ath")) {
+            openMessage().then((res) => {
+              history.push(`${redirPath}/${getCookie("ui")}`);
+            });
+          }
+        } else {
+          warning();
+        }
+      }
+    });
+  };
+
   const openMessage = () => {
     let loading = new Promise((res, rej) => {
       const key = "updatable";
@@ -36,46 +64,32 @@ const Login = () => {
 
   let onSingin = (e) => {
     e.preventDefault();
-    signinPromise(dispatch, data).then((res) => {
-      if (res) {
-        openMessage().then((res) => {
-          history.push("/");
-        });
-      } else {
-        warning();
-      }
-    });
+    signinFetch(data, "/");
+  };
+
+  const onFinish = (values) => {
+    console.log("Success:", values);
+    signinFetch(values, "/admin/dashboard");
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
   };
 
   return (
-    <div className="login">
-      <span className="login--title">Login</span>
-      <form className="login--form">
-        <label>Email</label>
-        <input
+    <Fragment>
+      {authType === "commonUser" ? (
+        <UserAuth
           onChange={onChange}
-          name={"email"}
-          value={data.email}
-          type="email"
-          placeholder="Enter your email..."
+          data={data}
+          onSingin={onSingin}
+          ath={ath}
+          msj={msj}
         />
-        <label>Password</label>
-        <input
-          onChange={onChange}
-          name={"password"}
-          value={data.password}
-          type="password"
-          placeholder="Enter your password..."
-        />
-        <div className="auth-msj">{!ath && <p>{msj}</p>}</div>
-        <button onClick={onSingin} className="login--form--button">
-          Ingresar
-        </button>
-      </form>
-      <Link to="/signup" className="link">
-        <button className="login--form--register-button">Register</button>
-      </Link>
-    </div>
+      ) : (
+        <LoginAdmin onFinish={onFinish} onFinishFailed={onFinishFailed} />
+      )}
+    </Fragment>
   );
 };
 

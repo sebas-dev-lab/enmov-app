@@ -1,16 +1,33 @@
 import React from "react";
 import { Layout } from "antd";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Select } from "antd";
 
-const { Header, Content } = Layout;
-const LoginAdmin = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+const { Content } = Layout;
+
+const LoginAdmin = ({ onFinish, onFinishFailed }) => {
+  const [form] = Form.useForm();
+
+  const { Option } = Select;
+
+  
+  const onRoleChange = (value) => {
+    switch (value) {
+      case "admin":
+        form.setFieldsValue({
+          note: "Administrador",
+        });
+        return;
+
+      case "moderator":
+        form.setFieldsValue({
+          note: "Moderador",
+        });
+        return;
+      default:
+        break;
+    }
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
   return (
     <Layout className="layout">
       <Content style={{ padding: "20px 100px", backgroundColor: "white" }}>
@@ -26,6 +43,7 @@ const LoginAdmin = () => {
             initialValues={{
               remember: true,
             }}
+            form={form}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
           >
@@ -56,16 +74,25 @@ const LoginAdmin = () => {
             </Form.Item>
 
             <Form.Item
-              name="remember"
-              valuePropName="checked"
-              wrapperCol={{
-                offset: 8,
-                span: 16,
-              }}
+              name="rol"
+              label="Rol de usuario"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
             >
-              <Checkbox>Recordarme</Checkbox>
+              <Select
+                placeholder="Selecciona el rol"
+                onChange={onRoleChange}
+                allowClear
+              >
+                <Option value="moderator">Moderador</Option>
+                <Option value="admin">Administrador</Option>
+              </Select>
             </Form.Item>
 
+          
             <Form.Item
               wrapperCol={{
                 offset: 8,
