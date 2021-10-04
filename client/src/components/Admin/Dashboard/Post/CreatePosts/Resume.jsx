@@ -1,12 +1,14 @@
 import React, { Fragment } from "react";
-import { Input, Form } from "antd";
+import { Input, Form, Button } from "antd";
 
 const { TextArea } = Input;
 
-const Resume = ({ content, setContent }) => {
-  const onChange = (e) => {
-    setContent({ ...content, [e.target.name]: e.target.value });
-  };
+const Resume = ({ phases, onFinish, onFinishFailed }) => {
+  const [form] = Form.useForm();
+
+  // const onChange = (e) => {
+  //   setContent({ ...content, [e.target.name]: e.target.value });
+  // };
   return (
     <Fragment>
       <Form
@@ -20,38 +22,63 @@ const Resume = ({ content, setContent }) => {
         initialValues={{
           remember: true,
         }}
-        // onFinish={onFinish}
-        // onFinishFailed={onFinishFailed}
+        form={form}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
       >
-        <Form.Item label="Titulo" valuePropName="title" required={true}>
+        <Form.Item
+          label="Titulo"
+          name="title"
+          rules={[
+            {
+              required: true,
+              message: "Escribe un titulo para tu post",
+            },
+          ]}
+        >
           <Input
-            name="title"
             placeholder="Elige un titulo para tu post"
             allowClear
-            onChange={onChange}
             bordered={false}
           />
         </Form.Item>
-        <Form.Item label="Subtitulo" valuePropName="subtitle">
+        <Form.Item label="Subtitulo" name="subtitle">
           <Input
-            name="subtitle"
             placeholder="Puedes agregar un subtitulo"
             allowClear
-            onChange={onChange}
             bordered={false}
           />
         </Form.Item>
 
-        <Form.Item label="Resumen" valuePropName="resume" required={true}>
+        <Form.Item
+          label="Resumen"
+          name="resume"
+          rules={[
+            {
+              required: true,
+              message: "Escribe un resumen de tu post",
+            },
+          ]}
+        >
           <TextArea
-            name="resume"
             placeholder="Agrega un resumen a tu post. Atrae a tus lectores con un resumen deslumbrante"
             allowClear
-            onChange={onChange}
             autoSize={{ minRows: 2, maxRows: 6 }}
             bordered={false}
           />
         </Form.Item>
+        {!phases.step_1 && (
+          <Form.Item
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+          >
+            <Button type="primary" htmlType="submit">
+              Crear post
+            </Button>
+          </Form.Item>
+        )}
       </Form>
     </Fragment>
   );

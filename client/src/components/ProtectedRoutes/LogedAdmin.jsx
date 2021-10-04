@@ -14,7 +14,6 @@ const AdminProtected = ({ component: Component, ...rest }) => {
   }, [ath]);
 
   if (getAuthCookieString("token").token) {
-      
     return (
       <Route
         {...rest}

@@ -36,12 +36,6 @@ const warning = () => {
 
 const CreatePost = () => {
   const dispatch = useDispatch();
-  const [content, setContent] = useState({
-    date: Date.now(),
-    title: "",
-    subtitle: "",
-    resume: "",
-  });
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [step, setStep] = useState(1);
   const [phases, setPhases] = useState({
@@ -61,18 +55,23 @@ const CreatePost = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  const handleCreateNewPost = (e) => {
-    e.preventDefault();
-    success();
-    setPhases({ ...phases, step_1: true });
-    // createNewPostPromise(dispatch, content).then((res) => {
-    //   if (res) {
-    //     success();
-    //   } else {
-    //     error();
-    //   }
-    // });
+  const handleCreateNewPost = (values) => {
+    console.log(values);
+    values.date = Date.now();
+    createNewPostPromise(dispatch, values).then((res) => {
+      if (res) {
+        success();
+        setPhases({ ...phases, step_1: true });
+      } else {
+        error();
+      }
+    });
   };
+
+  function onFinishFailed(e) {
+    console.log(e);
+    error();
+  }
 
   let handleSetStep = () => {
     let st = 1;
@@ -120,12 +119,11 @@ const CreatePost = () => {
         <div className="resume-section">
           {/* titulo, subtitulo, resumen, imagen de portada */}
           <p>Paso 1 - Informacion basica del post</p>
-          <Resume content={content} setContent={setContent} />
-          {!phases.step_1 && (
-            <Button onClick={handleCreateNewPost} type="primary">
-              Crear post
-            </Button>
-          )}
+          <Resume
+            phases={phases}
+            onFinishFailed={onFinishFailed}
+            onFinish={handleCreateNewPost}
+          />
         </div>
         <div className="post-section">
           {/* Post full description images*/}

@@ -18,6 +18,7 @@ import { getAuthCookieString } from "./helpers/stringsManage";
 // test
 import Uc from "./components/Test/uc";
 import AdminProtected from "./components/ProtectedRoutes/LogedAdmin";
+import { LiveChatLoaderProvider, Chatwoot } from "react-live-chat-loader";
 
 function App() {
   let location = useLocation();
@@ -29,10 +30,18 @@ function App() {
   }, [location]);
 
   useEffect(() => {}, []);
+  let title = "Fayser";
 
+ 
   return (
     <Fragment>
-      {!path.includes(routes.auth.admin) &&
+      <LiveChatLoaderProvider
+        provider="chatwoot"
+        providerKey="nVXjD8kdvjWk7qvKJdbpqhqk"
+      >
+        <Chatwoot />
+      </LiveChatLoaderProvider>
+      {/* {!path.includes(routes.auth.admin) &&
       !path.includes(routes.post.write) ? (
         <NavBar />
       ) : !path.includes(routes.post.write) ? (
@@ -76,7 +85,7 @@ function App() {
         <Route exact path="/admin/dashboard/:id">
           <AdminProtected component={Admin} />
         </Route>
-      </Switch>
+      </Switch> */}
     </Fragment>
   );
 }
